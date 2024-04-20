@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="220dp"
+  xmlns:tools="http://schemas.android.com/tools"
+  app:cardCornerRadius="15dp"
+  android:elevation="15dp"
+  app:cardBackgroundColor="@android:color/transparent"
+  android:layout_margin="8dp">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:id="@+id/card_rectangle"
+      android:layout_width="match_parent"
+      android:layout_height="220dp"
+      android:background="@drawable/card_rectangle"
+      />
+
+    <View
+      app:layout_constraintBottom_toBottomOf="@id/card_rectangle"
+      android:id="@+id/bottom_rectangle"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:background="@drawable/bottom_rectangle"
+      />
+
+    <View
+      app:layout_constraintTop_toTopOf="@id/card_rectangle"
+      app:layout_constraintStart_toStartOf="@id/card_rectangle"
+      android:id="@+id/top_rectangle"
+      android:layout_width="match_parent"
+      android:layout_height="30dp"
+      android:background="@drawable/top_rectangle"
+      />
+
+    <androidx.cardview.widget.CardView
+      app:layout_constraintTop_toBottomOf="@id/top_rectangle"
+      app:layout_constraintStart_toStartOf="parent"
+      android:id="@+id/image_card"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:cardCornerRadius="11dp"
+      app:cardElevation="8dp"
+      app:cardPreventCornerOverlap="true"
+      app:cardUseCompatPadding="true"
+      android:clipChildren="true"
+      android:clipToPadding="true">
+
+      <!-- Product image -->
+      <ImageView
+        android:id="@+id/image_product"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:scaleType="fitXY"
+        tools:src="@tools:sample/avatars" />
+
+      <View
+        android:id="@+id/image_rectangle"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="@drawable/image_rectangle"
+        />
+    </androidx.cardview.widget.CardView>
+
+
+
+    <!-- Logo at the top-left corner -->
+    <ImageView
+      app:layout_constraintStart_toStartOf="@id/top_rectangle"
+      app:layout_constraintTop_toTopOf="@id/top_rectangle"
+      app:layout_constraintBottom_toBottomOf="@id/top_rectangle"
+      android:layout_marginStart="8dp"
+      android:id="@+id/image_market_logo"
+      android:layout_width="25dp"
+      android:layout_height="25dp"
+      tools:src="@drawable/dns_logo" />
+
+    <!-- Market name -->
+    <TextView
+      app:layout_constraintStart_toEndOf="@id/image_market_logo"
+      app:layout_constraintTop_toTopOf="@id/top_rectangle"
+      app:layout_constraintBottom_toBottomOf="@id/top_rectangle"
+      android:layout_marginStart="7dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/text_market_name"
+      tools:text="DNS"
+      android:textStyle="bold"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      />
+
+    <!-- Price tag at the top-right corner -->
+    <TextView
+      app:layout_constraintTop_toTopOf="@id/top_rectangle"
+      app:layout_constraintEnd_toEndOf="@id/top_rectangle"
+      app:layout_constraintBottom_toBottomOf="@id/top_rectangle"
+      android:layout_marginEnd="7dp"
+      android:id="@+id/text_price_tag"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      tools:text="от 56 000 ₽"
+      android:textStyle="bold"
+      android:textColor="@color/blueText"
+      android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <!-- Heart button to favorite -->
+    <ImageButton
+      app:layout_constraintTop_toTopOf="@id/text_displayed_price"
+      app:layout_constraintBottom_toBottomOf="@id/text_displayed_price"
+      app:layout_constraintEnd_toEndOf="@id/card_rectangle"
+      android:layout_marginEnd="10dp"
+      android:id="@+id/button_favorite"
+      android:layout_width="23dp"
+      android:layout_height="20dp"
+      android:scaleType="fitXY"
+      android:background="?android:selectableItemBackground"
+      android:src="@drawable/heart_icon"
+      tools:src="@drawable/filled_heart_icon"/>
+
+    <!-- Product name and details -->
+    <TextView
+      app:layout_constraintStart_toEndOf="@id/image_card"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/top_rectangle"
+      android:layout_marginTop="20dp"
+      android:layout_marginEnd="10dp"
+      android:id="@+id/text_product_name"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      tools:text="Смартфон Apple iPhone 15 128GB Green (Dual Sim)"
+      android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+
+    <!-- Displayed price -->
+    <TextView
+      app:layout_constraintTop_toBottomOf="@id/text_product_name"
+      app:layout_constraintStart_toEndOf="@id/image_card"
+      app:layout_constraintBottom_toTopOf="@id/bottom_rectangle"
+      android:id="@+id/text_displayed_price"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      tools:text="56 000 ₽"
+      android:textAppearance="?android:attr/textAppearanceLarge"
+      android:textStyle="bold" />
+
+    <!-- All offers button -->
+    <TextView
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/bottom_rectangle"
+      app:layout_constraintBottom_toBottomOf="@id/bottom_rectangle"
+      android:id="@+id/button_all_offers"
+      android:layout_width="wrap_content"
+      android:textStyle="bold"
+      android:layout_height="wrap_content"
+      android:text="@string/all_offers"
+      android:textColor="@color/blueText" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
