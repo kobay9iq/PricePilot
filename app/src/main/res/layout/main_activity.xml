@@ -49,17 +49,17 @@
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/favorites_main_button"
-    android:layout_width="176dp"
+    android:layout_width="wrap_content"
     android:layout_height="30dp"
     android:layout_marginTop="16dp"
     android:background="@drawable/button_rectangle"
     android:icon="@drawable/heart_icon"
+    app:iconSize="15dp"
     android:paddingVertical="0dp"
     android:text="@string/favorites_button"
     android:textSize="12sp"
     android:theme="@style/button"
-    app:iconGravity="start"
-    app:iconTint="@null"
+    app:iconGravity="textStart"
     app:layout_constraintStart_toStartOf="@id/search_bar"
     app:layout_constraintTop_toBottomOf="@id/search_bar" />
 

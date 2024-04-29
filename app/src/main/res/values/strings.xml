@@ -3,4 +3,5 @@
   <string name="favorites_button">Сохраненные товары</string>
   <string name="search_button_hint">Полетели!</string>
   <string name="all_offers">Все предложения</string>
+  <string name="store_parse_error">Во время получения данных произошла ошибка: %s</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.pricepilot;
 
 import android.graphics.drawable.Drawable;
+import java.net.URL;
 
 public class Product {
   private Drawable marketLogo;
@@ -9,6 +10,8 @@ public class Product {
   private String productName;
   private String price;
   private boolean isFavorite;
+  private URL productURL;
+  private URL similarProducts;
 
   public Product(Drawable marketLogo, Drawable productLogo, String marketName, String productName,
       String price, boolean isFavorite) {
