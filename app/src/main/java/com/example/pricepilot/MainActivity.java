@@ -13,15 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import java.util.Collections;
 import java.util.List;
+import kotlin.collections.AbstractMutableList;
 
 public class MainActivity extends AppCompatActivity {
+  private static final String BASE_URL = "http://77.221.154.82/";
   private static final int INPUT_FINISH_DELAY = 3000;
-  private Handler inputFinishHandler = new Handler();
-  private Runnable inputFinishChecker;
+  private Handler eTHandler = new Handler();
+  private NetworkModule networkModule;
+  private Runnable eTrunnable;
   private EditText searchBarView = null;
   private RecyclerView productRecycler = null;
   private MaterialButton favoritesButton = null;
   private ProductAdapter adapter = null;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -33,26 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     favoritesButton.setIconResource(R.drawable.filled_heart_icon);
 
-    searchBarView.addTextChangedListener(new TextWatcher() {
-      @Override
-      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-      }
-
-      @Override
-      public void onTextChanged(CharSequence s, int start, int before, int count) {
-      }
-
-      @Override
-      public void afterTextChanged(Editable s) {
-        inputFinishHandler.removeCallbacks(inputFinishChecker);
-
-        inputFinishChecker = () -> {
-          onInputFinished(s.toString());
-        };
-
-        inputFinishHandler.postDelayed(inputFinishChecker, INPUT_FINISH_DELAY);
-      }
-    });
+    networkModule = new NetworkModule(BASE_URL);
   }
 
   private void setUpViews() {
@@ -62,55 +47,56 @@ public class MainActivity extends AppCompatActivity {
 
     adapter = new ProductAdapter(Collections.emptyList(),this);
     productRecycler.setAdapter(adapter);
-  }
 
-  private void onInputFinished(String request) {
-    DownloadProductsTask task = new DownloadProductsTask();
-    task.execute(request);
-  }
-
-  private void makeToastWithError(String storeName) {
-    runOnUiThread(new Runnable() {
+    searchBarView.addTextChangedListener(new TextWatcher() {
       @Override
-      public void run() {
-        Toast.makeText(MainActivity.this,
-            String.format(getString(R.string.store_parse_error), storeName),
-            Toast.LENGTH_SHORT).show();
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+      }
+
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (eTrunnable != null) {
+          eTHandler.removeCallbacks(eTrunnable);
+        }
+      }
+
+      @Override
+      public void afterTextChanged(Editable s) {
+        eTrunnable = new Runnable() {
+          @Override
+          public void run() {
+            onInputFinished(s.toString());
+          }
+        };
+        eTHandler.postDelayed(eTrunnable, INPUT_FINISH_DELAY);
       }
     });
   }
 
 
-  public class DownloadProductsTask extends AsyncTask<String, Integer, List<Product>> {
-
-    @Override
-    protected List<Product> doInBackground(String... strings) {
-      List<Product> products = Collections.emptyList();
-
-      DNSParse dnsParse = new DNSParse(MainActivity.this);
-
-      try{
-        Product dnsResult = dnsParse.get_Product(strings[0]);
-        products.add(dnsResult);
-      } catch (RuntimeException e) {
-        makeToastWithError(dnsParse.SHOP_NAME);
+  private void onInputFinished(String request) {
+    networkModule.fetchData(request, new DataCallback<List<Product>>() {
+      @Override
+      public void onSuccess(List<Product> data) {
+        List<Product> filtredData = Collections.emptyList();
+        for (int i = 0; i < data.size(); i++) {
+          if (data.get(i).getProductName() == null) {
+            filtredData.add(data.get(i));
+          }
+        }
+        adapter.changeData(filtredData);
       }
 
-      return products;
-    }
-
-    @Override
-    protected void onPostExecute(List<Product> products) {
-      super.onPostExecute(products);
-      adapter.changeData(products);
-    }
-
-    @Override
-    protected void onProgressUpdate(Integer... values) {
-      super.onProgressUpdate(values);
-    }
+      @Override
+      public void onFailure(Throwable t) {
+        Toast.makeText(MainActivity.this, R.string.network_error, Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
 
-
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+  }
 }

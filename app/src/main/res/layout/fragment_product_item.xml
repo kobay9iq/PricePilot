@@ -56,7 +56,7 @@
         android:id="@+id/image_product"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:scaleType="fitXY"
+        android:scaleType="centerInside"
         tools:src="@tools:sample/avatars" />
 
       <View
@@ -138,11 +138,12 @@
       app:layout_constraintStart_toEndOf="@id/image_card"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toBottomOf="@id/top_rectangle"
+      app:layout_constraintBottom_toTopOf="@id/text_displayed_price"
       android:layout_marginTop="20dp"
       android:layout_marginEnd="10dp"
       android:id="@+id/text_product_name"
       android:layout_width="0dp"
-      android:layout_height="wrap_content"
+      android:layout_height="0dp"
       tools:text="Смартфон Apple iPhone 15 128GB Green (Dual Sim)"
       android:textAppearance="?android:attr/textAppearanceMedium" />
 
