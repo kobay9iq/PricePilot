@@ -26,7 +26,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
     super(itemView);
   }
 
-  public void bind(Product product, StartBrowserIntentListener listener) {
+  public void bind(Product product, StartBrowserIntentListener listener, ChangeDbCallback dbCallback) {
     marketNameView.setText(product.getMarketName());
     priceTagView.setText(product.getProductPrice());
     productNameView.setText(product.getProductName());
@@ -47,6 +47,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
         v -> {
           setHeartIcon(!product.isLiked());
           product.setLiked(!product.isLiked());
+          dbCallback.productToDatabase(product);
         });
   }
 

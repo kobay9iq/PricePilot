@@ -12,10 +12,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
   private List<Product> products;
   private LayoutInflater inflater;
   private StartBrowserIntentListener listener;
+  private ChangeDbCallback dbCallback;
 
-  public ProductAdapter(List<Product> products, Context context, StartBrowserIntentListener listener) {
+  public ProductAdapter(List<Product> products, Context context,
+      StartBrowserIntentListener listener, ChangeDbCallback dbCallback) {
     this.products = products;
     this.listener = listener;
+    this.dbCallback = dbCallback;
     inflater = LayoutInflater.from(context);
   }
 
@@ -27,7 +30,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
   @Override
   public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-    holder.bind(getItem(position), listener);
+    holder.bind(getItem(position), listener, dbCallback);
   }
 
   @Override

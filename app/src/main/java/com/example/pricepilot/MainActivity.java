@@ -18,9 +18,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements StartBrowserIntentListener {
+public class MainActivity extends AppCompatActivity implements StartBrowserIntentListener, ChangeDbCallback {
   private static final String BASE_URL = "http://77.221.154.82/";
   private static final int INPUT_FINISH_DELAY = 3000;
+  private AppDatabase appDatabase;
   private Handler eTHandler = new Handler();
   private NetworkModule networkModule;
   private Runnable eTrunnable;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements StartBrowserInten
     favoritesButton.setIconResource(R.drawable.filled_heart_icon);
 
     networkModule = new NetworkModule(BASE_URL);
+
+    appDatabase = AppDatabase.create(this);
   }
 
   @Override
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements StartBrowserInten
     favoritesButton = findViewById(R.id.favorites_main_button);
     progressBar = findViewById(R.id.progressBar);
 
-    adapter = new ProductAdapter(Collections.emptyList(),this, this);
+    adapter = new ProductAdapter(Collections.emptyList(),this, this, this);
     productRecycler.setAdapter(adapter);
 
     searchBarView.addTextChangedListener(new TextWatcher() {
@@ -111,5 +114,14 @@ public class MainActivity extends AppCompatActivity implements StartBrowserInten
     Intent i = new Intent(Intent.ACTION_VIEW);
     i.setData(Uri.parse(url));
     startActivity(i);
+  }
+
+  @Override
+  public void productToDatabase(Product product) {
+    if (product.isLiked()) {
+      appDatabase.productDAO().insert(product);
+    } else {
+      appDatabase.productDAO().deleteById(product.getId());
+    }
   }
 }
