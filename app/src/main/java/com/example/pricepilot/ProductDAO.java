@@ -20,9 +20,10 @@ public interface ProductDAO {
   public void update(Product product);
 
   @Query("SELECT * FROM Products ORDER BY ProductPrice ASC")
+  public List<Product> getProducts();
 
   @Delete
-  public void delete(Long productId);
+  public void delete(Product product);
 
   @Query("DELETE FROM Products WHERE _id == :id")
   public void deleteById(Long id);
