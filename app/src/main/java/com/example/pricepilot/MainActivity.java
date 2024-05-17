@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements StartBrowserInten
 
     if (getIntent() != null) {
       String request = getIntent().getStringExtra(StartActivity.REQUEST_KEY);
+      progressBar.setVisibility(View.VISIBLE);
       onInputFinished(request);
     }
   }
@@ -93,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements StartBrowserInten
         eTrunnable = new Runnable() {
           @Override
           public void run() {
-            progressBar.setVisibility(View.VISIBLE);
             onInputFinished(s.toString());
           }
         };
