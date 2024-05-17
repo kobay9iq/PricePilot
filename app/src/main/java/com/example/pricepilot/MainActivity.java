@@ -2,16 +2,22 @@ package com.example.pricepilot;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.net.http.NetworkException;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
@@ -39,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements StartBrowserInten
     setUpViews();
 
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+    EdgeToEdge.enable(this);
+
 
     favoritesButton.setIconResource(R.drawable.filled_heart_icon);
 
@@ -60,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements StartBrowserInten
 
     adapter = new ProductAdapter(Collections.emptyList(),this, this, this);
     productRecycler.setAdapter(adapter);
+
+    favoritesButton.setOnClickListener(v -> goToFavoritesActivity());
 
     searchBarView.addTextChangedListener(new TextWatcher() {
       @Override
@@ -87,26 +97,36 @@ public class MainActivity extends AppCompatActivity implements StartBrowserInten
     });
   }
 
+  private void goToFavoritesActivity() {
+    Intent intent = new Intent(this, FavoritesActivity.class);
+    startActivity(intent);
+  }
+
 
   private void onInputFinished(String request) {
-    networkModule.fetchData(request, new DataCallback<List<Product>>() {
-      @Override
-      public void onSuccess(List<Product> data) {
-        List<Product> filtredData = new ArrayList<>();
-        for (int i = 0; i < data.size(); i++) {
-          if (data.get(i).getProductName() != null) {
-            filtredData.add(data.get(i));
+    networkModule.fetchData(
+        request,
+        new DataCallback<List<Product>>() {
+          @Override
+          public void onSuccess(List<Product> data) {
+            List<Product> filtredData = new ArrayList<>();
+            for (int i = 0; i < data.size(); i++) {
+              if (data.get(i).getProductName() != null) {
+                filtredData.add(data.get(i));
+              }
+            }
+            progressBar.setVisibility(View.INVISIBLE);
+            if (filtredData.isEmpty()) {
+              throw new RuntimeException();
+            }
+            adapter.changeData(filtredData);
           }
-        }
-        progressBar.setVisibility(View.INVISIBLE);
-        adapter.changeData(filtredData);
-      }
 
-      @Override
-      public void onFailure(Throwable t) {
-        Toast.makeText(MainActivity.this, R.string.network_error, Toast.LENGTH_SHORT).show();
-      }
-    });
+          @Override
+          public void onFailure(Throwable t) {
+            Toast.makeText(MainActivity.this, R.string.network_error, Toast.LENGTH_SHORT).show();
+          }
+        });
   }
 
   @Override

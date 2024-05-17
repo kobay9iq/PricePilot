@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:id="@+id/favorites_main"
+  tools:context=".FavoritesActivity"
+  android:background="@color/white">
 
-</LinearLayout>
+  <View
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:id="@+id/top_rectangle_favorites"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    android:background="@drawable/favorites_activity_gradient"
+    />
+  
+  <ImageView
+    android:layout_width="34dp"
+    android:layout_height="23dp"
+    android:id="@+id/arrowBack"
+    android:src="@drawable/arrow_icon"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="@id/top_rectangle_favorites"
+    android:layout_marginBottom="13dp"
+    android:layout_marginStart="10dp"
+    />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="@id/top_rectangle_favorites"
+    android:layout_marginBottom="13dp"
+    android:textStyle="bold"
+    android:textSize="14sp"
+    android:text="@string/saved_products"
+    android:textColor="@color/white"
+    />
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/favorites_products_recycler_view"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="16dp"
+    android:scrollbars="vertical"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintTop_toBottomOf="@id/top_rectangle_favorites"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+  />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

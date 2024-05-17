@@ -5,4 +5,5 @@
   <string name="all_offers">Все предложения</string>
   <string name="store_parse_error">Во время получения данных произошла ошибка: %s</string>
   <string name="network_error">Произошла ошибка при получении данных</string>
+  <string name="saved_products">Сохраненные товары</string>
 </resources>

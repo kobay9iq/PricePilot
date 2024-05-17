@@ -38,6 +38,7 @@ android {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.21")
     implementation("androidx.room:room-runtime:2.5.0")
+    implementation("androidx.activity:activity:1.8.0")
     annotationProcessor("androidx.room:room-compiler:2.5.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
