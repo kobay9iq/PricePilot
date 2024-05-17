@@ -9,7 +9,7 @@
       android:pathData="M12 1 H310 C316.075 1 321 5.92487 321 12 L321 31 H1 L1 12 C1 5.92487 5.92487 1 12 1 Z"
       android:fillColor="#FFFFFF"/>
     <path
-      android:pathData="M12 1 H310 C316.075 1 321 5.92487 321 12 L321 31 H1 L1 12 C1 5.92487 5.92487 1 12 1 Z"
+      android:pathData="M1 31 H321"
       android:strokeWidth="2"
       android:strokeColor="#993291E3"/>
   </group>

@@ -58,9 +58,23 @@
     android:paddingVertical="0dp"
     android:text="@string/favorites_button"
     android:textSize="12sp"
-    android:theme="@style/button"
+    android:theme="@style/backgroundColorStyle"
     app:iconGravity="textStart"
     app:layout_constraintStart_toStartOf="@id/search_bar"
     app:layout_constraintTop_toBottomOf="@id/search_bar" />
+
+  <ProgressBar
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:id="@+id/progressBar"
+    android:indeterminate="true"
+    android:indeterminateTintMode="src_atop"
+    android:indeterminateTint="@color/blueText"
+    android:visibility="invisible"
+    tools:visibility="visible"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -101,6 +101,7 @@
       app:layout_constraintEnd_toStartOf="@id/chevron_btn"
       android:layout_marginEnd="2dp"
       android:id="@+id/text_price_tag"
+      android:background="@android:color/transparent"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       tools:text="от 56 000 ₽"
@@ -115,6 +116,7 @@
       app:layout_constraintTop_toTopOf="@id/top_rectangle"
       app:layout_constraintBottom_toBottomOf="@id/top_rectangle"
       android:src="@drawable/chevron_right"
+      android:background="@android:color/transparent"
       android:layout_marginEnd="7dp"
       android:id="@+id/chevron_btn"
       />
@@ -129,7 +131,7 @@
       android:layout_width="23dp"
       android:layout_height="20dp"
       android:scaleType="fitXY"
-      android:background="?android:selectableItemBackground"
+      android:background="@android:color/transparent"
       android:src="@drawable/heart_icon"
       tools:src="@drawable/filled_heart_icon"/>
 
@@ -144,6 +146,10 @@
       android:id="@+id/text_product_name"
       android:layout_width="0dp"
       android:layout_height="0dp"
+      android:autoSizeTextType="uniform"
+      android:autoSizeMinTextSize="12sp"
+      android:autoSizeMaxTextSize="24sp"
+      android:autoSizeStepGranularity="1sp"
       tools:text="Смартфон Apple iPhone 15 128GB Green (Dual Sim)"
       android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -154,6 +160,7 @@
       app:layout_constraintTop_toBottomOf="@id/text_product_name"
       app:layout_constraintStart_toEndOf="@id/image_card"
       app:layout_constraintBottom_toTopOf="@id/bottom_rectangle"
+      android:layout_marginBottom="11dp"
       android:id="@+id/text_displayed_price"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

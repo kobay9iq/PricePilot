@@ -3,22 +3,19 @@ package com.example.pricepilot;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
   private List<Product> products;
   private LayoutInflater inflater;
+  private StartBrowserIntentListener listener;
 
-  public ProductAdapter(List<Product> products, Context context) {
+  public ProductAdapter(List<Product> products, Context context, StartBrowserIntentListener listener) {
     this.products = products;
+    this.listener = listener;
     inflater = LayoutInflater.from(context);
   }
 
@@ -30,7 +27,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
   @Override
   public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-    holder.bind(getItem(position));
+    holder.bind(getItem(position), listener);
   }
 
   @Override

@@ -6,7 +6,7 @@
 
   </style>
 
-  <style name="button" parent="ThemeOverlay.AppCompat">
+  <style name="backgroundColorStyle" parent="ThemeOverlay.AppCompat">
     <item name="colorPrimary">@color/hintBackground</item>
   </style>
 

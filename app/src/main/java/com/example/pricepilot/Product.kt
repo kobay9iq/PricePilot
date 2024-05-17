@@ -1,6 +1,7 @@
 package com.example.pricepilot
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 data class Product(
@@ -10,6 +11,9 @@ data class Product(
 	val productUrl: String? = null,
 	val sameProductsUrl: String? = null,
 	val productName: String? = null,
-	val productPrice: String? = null
-)
+	val productPrice: String? = null,
+) {
+	@Transient
+	var isLiked = false
+}
 

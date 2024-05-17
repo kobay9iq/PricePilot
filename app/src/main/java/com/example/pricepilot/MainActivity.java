@@ -1,27 +1,31 @@
 package com.example.pricepilot;
 
-import android.os.AsyncTask;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import kotlin.collections.AbstractMutableList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements StartBrowserIntentListener {
   private static final String BASE_URL = "http://77.221.154.82/";
   private static final int INPUT_FINISH_DELAY = 3000;
   private Handler eTHandler = new Handler();
   private NetworkModule networkModule;
   private Runnable eTrunnable;
   private EditText searchBarView = null;
+  private ProgressBar progressBar = null;
   private RecyclerView productRecycler = null;
   private MaterialButton favoritesButton = null;
   private ProductAdapter adapter = null;
@@ -40,12 +44,18 @@ public class MainActivity extends AppCompatActivity {
     networkModule = new NetworkModule(BASE_URL);
   }
 
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+  }
+
   private void setUpViews() {
     searchBarView = findViewById(R.id.search_bar);
     productRecycler = findViewById(R.id.products_recycler_view);
     favoritesButton = findViewById(R.id.favorites_main_button);
+    progressBar = findViewById(R.id.progressBar);
 
-    adapter = new ProductAdapter(Collections.emptyList(),this);
+    adapter = new ProductAdapter(Collections.emptyList(),this, this);
     productRecycler.setAdapter(adapter);
 
     searchBarView.addTextChangedListener(new TextWatcher() {
@@ -65,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         eTrunnable = new Runnable() {
           @Override
           public void run() {
+            progressBar.setVisibility(View.VISIBLE);
             onInputFinished(s.toString());
           }
         };
@@ -78,12 +89,13 @@ public class MainActivity extends AppCompatActivity {
     networkModule.fetchData(request, new DataCallback<List<Product>>() {
       @Override
       public void onSuccess(List<Product> data) {
-        List<Product> filtredData = Collections.emptyList();
+        List<Product> filtredData = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
-          if (data.get(i).getProductName() == null) {
+          if (data.get(i).getProductName() != null) {
             filtredData.add(data.get(i));
           }
         }
+        progressBar.setVisibility(View.INVISIBLE);
         adapter.changeData(filtredData);
       }
 
@@ -94,9 +106,10 @@ public class MainActivity extends AppCompatActivity {
     });
   }
 
-
   @Override
-  protected void onDestroy() {
-    super.onDestroy();
+  public void startBrowserIntent(String url) {
+    Intent i = new Intent(Intent.ACTION_VIEW);
+    i.setData(Uri.parse(url));
+    startActivity(i);
   }
 }

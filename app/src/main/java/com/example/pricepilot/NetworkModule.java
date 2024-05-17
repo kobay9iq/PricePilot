@@ -2,6 +2,7 @@ package com.example.pricepilot;
 
 import android.util.Log;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import kotlinx.serialization.json.Json;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -23,6 +24,9 @@ public class NetworkModule {
     OkHttpClient client = new OkHttpClient.Builder()
         .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .addNetworkInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
         .build();
 
 
