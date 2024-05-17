@@ -2,9 +2,92 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/main"
+  android:id="@+id/start_main"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".StartActivity">
+
+  <View
+    android:id="@+id/start_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/start_background"
+    />
+
+  <ImageView
+    android:layout_width="325dp"
+    android:layout_height="129dp"
+    android:id="@+id/start_logo"
+    android:layout_marginTop="144dp"
+    android:src="@drawable/main_logo"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    />
+
+  <EditText
+    android:id="@+id/start_search_bar"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:paddingStart="12dp"
+    android:background="@drawable/search_rectangle"
+    android:drawablePadding="8dp"
+    android:drawableStart="@drawable/search_icon"
+    android:hint="@string/search_button_hint"
+    android:inputType="text"
+    android:maxLines="1"
+    android:textColor="@color/black"
+    android:layout_marginTop="150dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/start_logo"
+    />
+
+  <ImageView
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:id="@+id/question_icon"
+    android:src="@drawable/question_icon"
+    app:layout_constraintStart_toStartOf="@id/start_search_bar"
+    app:layout_constraintTop_toBottomOf="@id/start_search_bar"
+    android:layout_marginTop="11dp"
+    />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/hintTV"
+    android:textSize="13sp"
+    android:textStyle="bold"
+    android:text="@string/start_hint"
+    android:textColor="@color/white"
+    android:layout_marginStart="11dp"
+    android:layout_marginTop="11dp"
+    app:layout_constraintStart_toEndOf="@id/question_icon"
+    app:layout_constraintBottom_toBottomOf="@id/question_icon"
+    app:layout_constraintTop_toBottomOf="@id/start_search_bar"
+    />
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/favorites_start_button"
+    android:layout_width="wrap_content"
+    android:layout_height="30dp"
+    android:background="@drawable/button_rectangle"
+    android:icon="@drawable/heart_icon"
+    app:iconSize="15dp"
+    android:paddingVertical="0dp"
+    android:text="@string/favorites_button"
+    android:textSize="12sp"
+    android:theme="@style/backgroundColorStyle"
+    app:iconGravity="textStart"
+    android:layout_marginBottom="30dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

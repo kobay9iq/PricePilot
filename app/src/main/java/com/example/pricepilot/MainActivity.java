@@ -26,11 +26,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements StartBrowserIntentListener, ChangeDbCallback {
   private static final String BASE_URL = "http://77.221.154.82/";
-  private static final int INPUT_FINISH_DELAY = 3000;
+  public static final int INPUT_FINISH_DELAY = 3000;
   private AppDatabase appDatabase;
   private Handler eTHandler = new Handler();
-  private NetworkModule networkModule;
   private Runnable eTrunnable;
+  private NetworkModule networkModule;
   private EditText searchBarView = null;
   private ProgressBar progressBar = null;
   private RecyclerView productRecycler = null;
@@ -53,6 +53,11 @@ public class MainActivity extends AppCompatActivity implements StartBrowserInten
     networkModule = new NetworkModule(BASE_URL);
 
     appDatabase = AppDatabase.create(this);
+
+    if (getIntent() != null) {
+      String request = getIntent().getStringExtra(StartActivity.REQUEST_KEY);
+      onInputFinished(request);
+    }
   }
 
   @Override

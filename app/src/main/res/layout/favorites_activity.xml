@@ -14,7 +14,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     android:id="@+id/top_rectangle_favorites"
     android:layout_width="match_parent"
-    android:layout_height="75dp"
+    android:layout_height="90dp"
     android:background="@drawable/favorites_activity_gradient"
     />
   

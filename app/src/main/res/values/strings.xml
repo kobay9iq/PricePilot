@@ -6,4 +6,5 @@
   <string name="store_parse_error">Во время получения данных произошла ошибка: %s</string>
   <string name="network_error">Произошла ошибка при получении данных</string>
   <string name="saved_products">Сохраненные товары</string>
+  <string name="start_hint">Для точного поиска укажите\nключевые параметры</string>
 </resources>

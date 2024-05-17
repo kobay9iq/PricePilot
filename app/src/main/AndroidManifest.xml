@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools">
 
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
   <application
     android:allowBackup="true"
     android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,25 +17,24 @@
     android:theme="@style/Theme.PricePilot"
     tools:targetApi="31">
     <activity
-      android:exported="false"
-      android:name=".StartActivity" />
-    <activity
-      android:exported="false"
-      android:name=".FavoritesActivity"
-      android:screenOrientation="portrait" />
-    <activity
       android:exported="true"
-      android:name=".MainActivity"
-      android:screenOrientation="portrait">
+      android:name=".StartActivity"
+      android:screenOrientation="portrait"
+      >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity
+      android:exported="false"
+      android:name=".FavoritesActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:exported="false"
+      android:name=".MainActivity"
+      android:screenOrientation="portrait"/>
   </application>
-  <uses-permission android:name="android.permission.INTERNET" />
-
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>
