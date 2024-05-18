@@ -47,7 +47,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
         v -> {
           setHeartIcon(!product.isLiked());
           product.setLiked(!product.isLiked());
-          dbCallback.productToDatabase(product);
+          dbCallback.productLikeStatusChanged(product);
         });
   }
 

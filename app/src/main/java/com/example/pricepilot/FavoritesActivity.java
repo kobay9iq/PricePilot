@@ -53,7 +53,7 @@ public class FavoritesActivity extends AppCompatActivity implements StartBrowser
   }
 
   @Override
-  public void productToDatabase(Product product) {
+  public void productLikeStatusChanged(Product product) {
     if (product.isLiked()) {
       appDatabase.productDAO().insert(product);
     } else {
