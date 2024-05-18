@@ -1,8 +1,8 @@
 package com.example.pricepilot;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
+import android.content.pm.PackageManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -11,6 +11,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import com.google.android.material.button.MaterialButton;
 
 public class StartActivity extends AppCompatActivity {
@@ -29,6 +31,7 @@ public class StartActivity extends AppCompatActivity {
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
     setUpView();
+    requestNotification();
   }
 
   private void setUpView() {
@@ -74,5 +77,12 @@ public class StartActivity extends AppCompatActivity {
     startActivity(intent);
   }
 
+  private void requestNotification() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+      if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 1);
+      }
+    }
+  }
 
 }

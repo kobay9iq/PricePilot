@@ -30,7 +30,8 @@ public class NotificationReceiver extends BroadcastReceiver {
         .setContentIntent(pendingIntent)
         .setAutoCancel(true);
 
-    NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    NotificationManager notificationManager = (NotificationManager) context.getSystemService(
+        Context.NOTIFICATION_SERVICE);
 
     notificationManager.cancel(NOTIFICATION_ID);
 
@@ -38,16 +39,14 @@ public class NotificationReceiver extends BroadcastReceiver {
   }
 
   private void createNotificationChannel(Context context) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      CharSequence name = "Notification Channel";
-      String description = "Channel for notifications";
-      int importance = NotificationManager.IMPORTANCE_HIGH;
-      NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-      channel.setDescription(description);
+    CharSequence name = "Notification Channel";
+    String description = "Channel for notifications";
+    int importance = NotificationManager.IMPORTANCE_HIGH;
+    NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+    channel.setDescription(description);
 
-      NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-      notificationManager.createNotificationChannel(channel);
-    }
+    NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+    notificationManager.createNotificationChannel(channel);
   }
 
 }
