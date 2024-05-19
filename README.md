@@ -31,5 +31,5 @@ PricePilot relies on a backend service to fetch product data. The backend servic
 <p float="center">
   <img src="https://i.imgur.com/Gv8WBdi.jpeg" width="250">
   <img src="https://i.imgur.com/pTtbwfY.jpeg" width="250">
-  <img src="https://i.imgur.com/pTtbwfY.jpeg" width="250">
+  <img src="https://i.imgur.com/A8nmF5q.jpeg" width="250">
 </p>
